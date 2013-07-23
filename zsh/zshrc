@@ -48,4 +48,5 @@ PS1="[%{$fg[green]%}%n%{$reset_color%}@%m:%{$fg[yellow]%}%~%{$reset_color%}]%{$f
 
 # Aliases
 alias tree='tree -NC'
-
+alias ls='ls --color=auto'
+alias ll='ls -la --color=auto'
