@@ -25,6 +25,9 @@ setopt autocd
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
+# Variables
+export EDITOR="vim"
+
 # Keys definition
 autoload zkbd
 [[ ! -f ${ZDOTDIR:-$HOME}/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE} ]] && zkbd
@@ -50,3 +53,18 @@ PS1="[%{$fg[green]%}%n%{$reset_color%}@%m:%{$fg[yellow]%}%~%{$reset_color%}]%{$f
 alias tree='tree -NC'
 alias ls='ls --color=auto'
 alias ll='ls -la --color=auto'
+
+# Functions
+# -- coloured manuals
+
+man() {
+  env \
+    LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+    LESS_TERMCAP_md=$(printf "\e[1;31m") \
+    LESS_TERMCAP_me=$(printf "\e[0m") \
+    LESS_TERMCAP_se=$(printf "\e[0m") \
+    LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+    LESS_TERMCAP_ue=$(printf "\e[0m") \
+    LESS_TERMCAP_us=$(printf "\e[1;32m") \
+    man "$@"
+}
