@@ -1,0 +1,51 @@
+# The following lines were added by compinstall
+
+zstyle ':completion:*' auto-description 'arg: %d'
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+zstyle ':completion:*' format '%U%BCompleting %d%b%u'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' matcher-list '' '' '' ''
+zstyle ':completion:*' menu select=10
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' verbose true
+zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
+zstyle :compinstall filename '/home/jeremy/.zshrc'
+
+fpath=("$HOME/.zsh.d" $fpath)
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt autocd
+bindkey -e
+# End of lines configured by zsh-newuser-install
+
+# Keys definition
+autoload zkbd
+[[ ! -f ${ZDOTDIR:-$HOME}/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE} ]] && zkbd
+source ${ZDOTDIR:-$HOME}/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}
+
+[[ -n ${key[Backspace]} ]] && bindkey "${key[Backspace]}" backward-delete-char
+[[ -n ${key[Insert]} ]] && bindkey "${key[Insert]}" overwrite-mode
+[[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
+[[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" up-line-or-history
+[[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
+[[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
+[[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" down-line-or-history
+[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-search
+[[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
+[[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
+[[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
+
+autoload colors
+colors
+PS1="[%{$fg[green]%}%n%{$reset_color%}@%m:%{$fg[yellow]%}%~%{$reset_color%}]%{$fg_bold[blue]%}%#%{$reset_color%} "
+
+# Aliases
+alias tree='tree -NC'
+
