@@ -44,10 +44,18 @@ source ${ZDOTDIR:-$HOME}/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}
 [[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
 [[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
 [[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
+bindkey ';5D' emacs-backward-word
+bindkey ';5C' emacs-forward-word
 
 autoload colors
 colors
 PS1="[%{$fg[green]%}%n%{$reset_color%}@%m:%{$fg[yellow]%}%~%{$reset_color%}]%{$fg_bold[blue]%}%#%{$reset_color%} "
+
+case $TERM in
+    *xterm*)
+        precmd () {print -Pn "\e]0;%n@%M: %~\a"}
+        ;;
+esac
 
 # Aliases
 alias tree='tree -NC'
@@ -68,3 +76,11 @@ man() {
     LESS_TERMCAP_us=$(printf "\e[1;32m") \
     man "$@"
 }
+
+[[ -f $(which keychain 2> /dev/null) ]] && \
+    keychain --nogui --quiet id_rsa
+
+[[ -f $HOME/.keychain/$HOSTNAME-sh ]] && \
+    source $HOME/.keychain/$HOSTNAME-sh
+
+
