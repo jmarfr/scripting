@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/jeremy/workspace/packages/debian/pgBackup/pgBackup-1.0.0/debian'
+let g:netrw_dirhist_2='/tmp/keyring-zTSHbi'
+let g:netrw_dirhist_3='/home/jeremy/.config'
+let g:netrw_dirhist_4='/home/jeremy/workspace/projets/inventaire/trunk/ocs/etc/ocsinventory-agent'
+let g:netrw_dirhist_5='/home/jeremy/work/inventaire/.vim'

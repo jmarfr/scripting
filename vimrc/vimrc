@@ -1,0 +1,129 @@
+" .vimrc file
+"
+" vim: set foldmethod=marker:
+"
+" Create on: 31th October 2008 for Vim 7.0.234
+" Last edit: 19th June 2013 for Vim 7.3
+" version: 580
+" by: François LASSERRE
+"
+" This file is available on my github repo:
+" http://www.github.com/ChoiZ/Vim-config
+"
+
+" Autoreload vimrc on change
+"autocmd! BufWritePost vimrc source $MYVIMRC
+"autocmd! BufWritePost .vimrc source $MYVIMRC
+
+" Set nocompatible mode for vi
+set nocompatible
+
+
+" TERM Preferences {{{
+
+set t_Co=256 " The terminal supports 256 colors
+set title
+set titlestring=%f title " Display filename in terminal window
+
+" }}}
+
+
+" FILES Preferences {{{
+
+" Set syntax highlighting
+syntax on
+
+" Set filetype
+filetype on
+filetype plugin on
+
+" Define file format to utf-8
+set encoding=utf-8 nobomb
+set fileencoding=utf-8
+set binary
+set noeol " Don't add empty newlines at the end of files
+
+" colors: font, background and colorscheme
+set background=dark
+"colorscheme solarized
+
+set showcmd
+set showmatch " Show open or close bracket
+set number " Add line number
+set ruler
+set cursorline
+
+set modeline
+set modelines=5
+
+" }}}
+
+
+" SEARCH / BELLS ERROR {{{
+
+set hlsearch " highlight search
+set ignorecase " case insensitive on search
+set smartcase " case sensitive for caps on search
+	"(/the return The, the... /The return only The)
+
+set noerrorbells " No error bells
+set visualbell " Blink on error
+
+" }}}
+
+
+" TEXT Preferences (indent,listchars,wrap) {{{
+
+"set preserveindent
+set tabstop=4 " 1 Tab = 4 spaces
+set shiftwidth=4 " Tab on autoindent
+set softtabstop=4
+"set noet|retab! " Set no expandtab retab
+set expandtab
+"set cindent
+set smartindent
+"set autoindent
+
+set listchars=tab:→-,trail:¤,extends:>,precedes:<,nbsp:␣
+set list
+set backspace=indent,eol,start
+
+"set textwidth=80
+set nowrap
+"set colorcolumn=+0
+"set formatoptions=qn1
+
+"set mouse=a
+"set mousehide
+"set clipboard=unnamed
+"set pastetoggle=<F10>
+
+" Don't destroy buffer
+set nohidden
+
+" }}}
+
+
+" LAYOUT {{{
+
+"" Clear Search {{{
+noremap <F2> :let @/ = ""<CR>
+"" }}}
+
+" }}}
+
+" LANGUAGE-SPECIFIC {{{
+
+"" Perl stuff {{{
+let perl_fold = 1
+let perl_include_pod = 1
+let perl_extended_vars = 1
+let perl_nofold_packages = 1
+""}}}
+
+"" Xml stuff {{{
+let g:xml_syntax_folding = 1
+au FileType xml setlocal foldmethod=syntax
+""}}}
+
+" }}}%                       
