@@ -1,0 +1,80 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          glances
+# chkconfig:         2345  80 80
+# Short-Description: Start and stop the Glance server
+### END INIT INFO
+
+DESC="Glances server"
+NAME=glances
+DAEMON=/usr/bin/$NAME
+DAEMON_ARGS=" -s"
+PIDFILE=/var/run/$NAME.pid
+LOCKFILE=/var/lock/subsys/glances
+SCRIPTNAME=/etc/init.d/$NAME
+
+# Exit if the package is not installed
+[ -x "$DAEMON" ] || exit 0
+
+# Read configuration variable file if it is present
+[ -r /etc/sysconfig/$NAME ] && . /etc/sysconfig/$NAME
+
+# Source function library
+INITD=/etc/rc.d/init.d
+. $INITD/functions
+
+start(){
+	
+	echo -n $"Starting $NAME: "
+	[ -x $DAEMON ] || exit 5
+	daemon --pidfile ${PIDFILE} $DAEMON $DAEMON_ARGS&
+	RETVAL=$?
+	echo
+	[ $RETVAL -eq 0 ] && touch ${LOCKFILE} && pgrep -f glances > ${PIDFILE}
+
+}
+
+stop(){
+	echo -n $"Stopping $NAME: "
+	if [ -f $PIDFILE ] ; then
+		killall glances
+		RETVAL=$?
+		echo
+	else 
+		RETVAL=2
+	fi
+
+	if [ $RETVAL -eq 0 ]; then
+		rm -f ${PIDFILE} ${LOCKFILE}
+	fi
+}
+
+restart(){
+	stop
+	start
+}
+
+_status(){
+	status -p ${PIDFILE} ${NAME}
+}
+
+case "$1" in
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		restart
+		;;
+	status)
+		_status
+		;;
+	*)
+		echo $"Usage: $0 {start|stop|restart|status}"
+		RETVAL=2
+		;;
+esac
+
+exit $RETVAL
