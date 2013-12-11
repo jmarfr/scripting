@@ -46,6 +46,8 @@ source ${ZDOTDIR:-$HOME}/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}
 [[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
 bindkey ';5D' emacs-backward-word
 bindkey ';5C' emacs-forward-word
+bindkey "\e[1;5C" forward-word
+bindkey "\e[1;5D" backward-word
 
 autoload colors
 colors
@@ -62,6 +64,8 @@ alias tree='tree -NC'
 alias ls='ls --color=auto'
 alias ll='ls -la --color=auto'
 
+source ~/.zsh_aliases
+
 # Functions
 # -- coloured manuals
 
@@ -77,10 +81,9 @@ man() {
     man "$@"
 }
 
-[[ -f $(which keychain 2> /dev/null) ]] && \
-    keychain --nogui --quiet id_rsa
-
-[[ -f $HOME/.keychain/$HOSTNAME-sh ]] && \
-    source $HOME/.keychain/$HOSTNAME-sh
-
-
+#[[ -f $(which keychain 2> /dev/null) ]] && \
+#    keychain --nogui --quiet id_rsa
+#
+#[[ -f $HOME/.keychain/$HOSTNAME-sh ]] && \
+#    source $HOME/.keychain/$HOSTNAME-sh
+#
