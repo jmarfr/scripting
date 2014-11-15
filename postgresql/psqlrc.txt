@@ -44,14 +44,14 @@
 
 \pset linestyle unicode
 
-\pset null †
 
- 
 
 \timing on
 
 #postgresql 9.2
 
-#\x auto
+\x auto
+\setenv LESS -imx4F
+\pset null '[NULL]'
 
 \unset QUIET
